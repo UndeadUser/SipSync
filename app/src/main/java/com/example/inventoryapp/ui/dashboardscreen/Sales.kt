@@ -1,5 +1,6 @@
 package com.example.inventoryapp.ui.dashboardscreen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -41,11 +42,21 @@ fun SalesScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Sales") }
+                title = { Text("Sales") },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color(0xFFF0EAD6),
+                    titleContentColor = Color(0xFFE97451)
+                )
             )
         },
+        contentColor = Color(0xFFE97451)
     ) { padding ->
-        LazyColumn(modifier = Modifier.padding(padding)) {
+        LazyColumn(modifier = Modifier
+            .padding(padding)
+            .fillMaxSize()
+            .background(Color(0xFFF0EAD6))
+            .padding(horizontal = 8.dp)
+        ) {
             items(items) { (label, route) ->
                 SalesListItem(label) { navController.navigate(route) }
             }
@@ -59,10 +70,10 @@ fun SalesListItem(text: String, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
-            .padding(8.dp)
+            .padding(vertical = 8.dp)
             .clickable { onClick() },
         elevation = CardDefaults.cardElevation(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFF0EAD6))
     ) {
         Box(
             modifier = Modifier
@@ -72,7 +83,8 @@ fun SalesListItem(text: String, onClick: () -> Unit) {
         ) {
             Text(
                 text = text,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyLarge
             )
         }
     }
@@ -81,8 +93,19 @@ fun SalesListItem(text: String, onClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SalesScreenContent(title: String) {
-    Scaffold(topBar = { TopAppBar(title = { Text(title) }) }) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = androidx.compose.ui.Alignment.Center) {
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text(title) })
+        },
+        contentColor = Color.Black
+    ) { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFFF0EAD6))
+                .padding(padding),
+            contentAlignment = Alignment.Center
+        ) {
             Text(title, style = MaterialTheme.typography.headlineMedium)
         }
     }

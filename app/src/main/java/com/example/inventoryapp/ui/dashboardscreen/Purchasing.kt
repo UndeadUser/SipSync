@@ -1,5 +1,6 @@
 package com.example.inventoryapp.ui.dashboardscreen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -40,11 +41,21 @@ fun PurchasingScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Purchasing") }
+                title = { Text("Purchasing") },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color(0xFFF0EAD6),
+                    titleContentColor = Color(0xFFE97451)
+                )
             )
         },
+        contentColor = Color(0xFFE97451)
     ) { padding ->
-        LazyColumn(modifier = Modifier.padding(padding)) {
+        LazyColumn(modifier = Modifier
+            .padding(padding)
+            .fillMaxSize()
+            .background(Color(0xFFF0EAD6))
+            .padding(horizontal = 8.dp)
+        ) {
             items(items) { (label, route) ->
                 PurchasingListItem(label) { navController.navigate(route) }
             }
@@ -61,7 +72,7 @@ fun PurchasingListItem(text: String, onClick: () -> Unit) {
             .padding(8.dp)
             .clickable { onClick() },
         elevation = CardDefaults.cardElevation(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFF0EAD6))
     ) {
         Box(
             modifier = Modifier
