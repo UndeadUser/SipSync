@@ -1,4 +1,4 @@
-package com.example.inventoryapp
+package com.example.inventoryapp.crud
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

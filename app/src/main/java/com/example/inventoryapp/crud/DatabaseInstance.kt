@@ -1,4 +1,4 @@
-package com.example.inventoryapp
+package com.example.inventoryapp.crud
 
 import android.content.Context
 import androidx.room.Room

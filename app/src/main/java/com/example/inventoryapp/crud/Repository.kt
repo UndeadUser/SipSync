@@ -1,4 +1,4 @@
-package com.example.inventoryapp
+package com.example.inventoryapp.crud
 
 class ProductRepository(private val productDao: ProductDao) {
 
