@@ -12,8 +12,10 @@ object DatabaseInstance {
             val instance = Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,
-                "app_database"
-            ).build()
+                "product_database"
+            )
+                .addMigrations(AppDatabase.MIGRATION_1_2) // 🔹 Apply migration
+                .build()
             INSTANCE = instance
             instance
         }
