@@ -51,10 +51,18 @@ fun EditProduct(navController: NavHostController, productId: Int, productReposit
                 title = { Text("Edit Product", color = Color(0xFFE97451)) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Back", tint = Color(0xFFE97451))
+                        Icon(
+                            Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                            contentDescription = "Back",
+                            tint = Color(0xFFE97451)
+                        )
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color(0xFFF0EAD6))
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color(
+                        0xFFF0EAD6
+                    )
+                )
             )
         }
     ) { innerPadding ->
@@ -77,7 +85,9 @@ fun EditProduct(navController: NavHostController, productId: Int, productReposit
             )
             OutlinedTextField(
                 value = productName,
-                onValueChange = { productName = it.replaceFirstChar { char -> char.uppercaseChar() } },
+                onValueChange = {
+                    productName = it.replaceFirstChar { char -> char.uppercaseChar() }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFFF0EAD6),
@@ -180,41 +190,46 @@ fun EditProduct(navController: NavHostController, productId: Int, productReposit
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
-                onClick = {
-                    val price = productPrice.toDoubleOrNull()
-                    val quantity = productQuantity.toIntOrNull()
-
-                    if (productName.isNotBlank() && price != null && quantity != null) {
-                        product?.let {
-                            val updatedProduct = it.copy(
-                                name = productName,
-                                price = price,
-                                quantity = quantity,
-                                category = selectedCategory
-                            )
-                            productViewModel.updateProduct(updatedProduct)
-                            navController.popBackStack()
-                        }
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .width(150.dp)
-                    .height(50.dp)
-                    .padding(horizontal = 50.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (productName.isNotBlank() && productPrice.isNotBlank() && productQuantity.isNotBlank())
-                        Color(0xFFE97451)
-                    else
-                        Color(0xFFF4C6B2),
-                    disabledContainerColor = Color(0xFFF4C6B2),
-                    contentColor = Color(0xFFF0EAD6),
-                    disabledContentColor = Color(0xFFF0EAD6)
-                ),
-                enabled = productName.isNotBlank() && productPrice.isNotBlank() && productQuantity.isNotBlank()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text("Save Changes")
+                Button(
+                    onClick = {
+                        val price = productPrice.toDoubleOrNull()
+                        val quantity = productQuantity.toIntOrNull()
+
+                        if (productName.isNotBlank() && price != null && quantity != null) {
+                            product?.let {
+                                val updatedProduct = it.copy(
+                                    name = productName,
+                                    price = price,
+                                    quantity = quantity,
+                                    category = selectedCategory
+                                )
+                                productViewModel.updateProduct(updatedProduct)
+                                navController.popBackStack()
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(50.dp)
+                        .height(50.dp)
+                        .padding(horizontal = 50.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (productName.isNotBlank() && productPrice.isNotBlank() && productQuantity.isNotBlank())
+                            Color(0xFFE97451)
+                        else
+                            Color(0xFFF4C6B2),
+                        disabledContainerColor = Color(0xFFF4C6B2),
+                        contentColor = Color(0xFFF0EAD6),
+                        disabledContentColor = Color(0xFFF0EAD6)
+                    ),
+                    enabled = productName.isNotBlank() && productPrice.isNotBlank() && productQuantity.isNotBlank()
+                ) {
+                    Text("Save Changes")
+                }
             }
         }
     }
