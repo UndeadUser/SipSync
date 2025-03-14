@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.inventoryapp.crud.Product
 import com.example.inventoryapp.crud.ProductRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,6 +95,7 @@ fun EditProduct(navController: NavHostController, productId: Int, productReposit
             Button(
                 onClick = {
                     coroutineScope.launch {
+                        val id = productId
                         val price = productPrice.toDoubleOrNull() ?: 0.0
                         val quantity = productQuantity.toIntOrNull() ?: 0
                         val updatedProduct = product?.copy(name = productName, price = price, quantity = quantity)

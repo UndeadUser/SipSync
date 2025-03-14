@@ -17,13 +17,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.inventoryapp.crud.Product
 import com.example.inventoryapp.crud.ProductRepository
+import com.example.inventoryapp.crud.ProductViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Products(navController: NavHostController, productRepository: ProductRepository) {
     var products by remember { mutableStateOf(listOf<Product>()) }
+
     val coroutineScope = rememberCoroutineScope()
+    val productViewModel = ProductViewModel(productRepository)
 
     LaunchedEffect(Unit) {
         products = productRepository.getAllProducts()
@@ -61,9 +64,10 @@ fun Products(navController: NavHostController, productRepository: ProductReposit
         ) {
             items(products) { product ->
                 ProductCard(product, navController, productRepository) {
-                    coroutineScope.launch {
-                        products = productRepository.getAllProducts()
-                    }
+//                    coroutineScope.launch {
+//                        products = productRepository.getAllProducts()
+//                    }
+                    productViewModel.getAllProducts()
                 }
             }
         }
@@ -77,7 +81,7 @@ fun ProductCard(
     productRepository: ProductRepository,
     onDelete: () -> Unit,
 ) {
-    val coroutineScope = rememberCoroutineScope()
+    val productViewModel = ProductViewModel(productRepository)
 
     Card(
         modifier = Modifier
@@ -97,18 +101,19 @@ fun ProductCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = product.name, style = MaterialTheme.typography.titleMedium)
-                Text(text = "Price: $${product.price}", style = MaterialTheme.typography.bodyMedium)
-                Text(text = "Quantity: ${product.quantity}", style = MaterialTheme.typography.bodyMedium)
+                Text(text = product.name, style = MaterialTheme.typography.titleMedium, color = Color(0xFFE97451))
+                Text(text = "Price: ₱${product.price}", style = MaterialTheme.typography.bodyMedium, color = Color(0xFFE97451))
+                Text(text = "Quantity: ${product.quantity}", style = MaterialTheme.typography.bodyMedium, color = Color(0xFFE97451))
             }
 
             IconButton(onClick = {
                 onDelete()
-                coroutineScope.launch {
-                    productRepository.deleteProduct(product)
-                }
+//                coroutineScope.launch {
+//                    productRepository.deleteProduct(product)
+//                }
+                productViewModel.deleteProduct(product)
             }) {
-                Icon(Icons.Default.Delete, contentDescription = "Delete Product")
+                Icon(Icons.Default.Delete, contentDescription = "Delete Product", tint = Color(0xFFE97451))
             }
         }
     }
