@@ -71,7 +71,9 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
     implementation ("androidx.navigation:navigation-compose:2.8.6")
     implementation ("androidx.compose.runtime:runtime-livedata:1.5.0")
-    kapt("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    implementation ("com.google.accompanist:accompanist-insets:0.28.0")
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
 }

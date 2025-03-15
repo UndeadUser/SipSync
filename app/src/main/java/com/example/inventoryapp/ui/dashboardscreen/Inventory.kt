@@ -23,8 +23,7 @@ import com.example.inventoryapp.ui.inventoryscreen.EditProduct
 import com.example.inventoryapp.ui.inventoryscreen.Products
 
 @Composable
-fun Inventory() {
-    val navController = rememberNavController()
+fun Inventory(navController: NavHostController) {
     val context = LocalContext.current
     val database = remember { AppDatabase.getDatabase(context) }
     val productRepository = remember { ProductRepository(database.productDao()) }
@@ -39,6 +38,7 @@ fun Inventory() {
         }
     }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,8 +103,8 @@ fun InventoryListItem(text: String, onClick: () -> Unit) {
 @Composable
 fun InventoryScreenContent(title: String) {
     Scaffold(topBar = { TopAppBar(title = { Text(title) }) }) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = androidx.compose.ui.Alignment.Center) {
-            Text(title, style = androidx.compose.material3.MaterialTheme.typography.headlineMedium)
+        Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+            Text(title, style = MaterialTheme.typography.headlineMedium)
         }
     }
 }
@@ -112,5 +112,6 @@ fun InventoryScreenContent(title: String) {
 @Preview(showBackground = true)
 @Composable
 fun InventoryScreenPreview() {
-    Inventory()
+    val navController = rememberNavController()
+    Inventory(navController)
 }

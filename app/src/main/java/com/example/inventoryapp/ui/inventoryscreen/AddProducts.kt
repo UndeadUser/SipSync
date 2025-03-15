@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
@@ -27,8 +26,6 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -93,17 +90,10 @@ fun AddProducts(navController: NavHostController, productRepository: ProductRepo
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
-
-            Text(
-                text = "Product Name",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                modifier = Modifier.padding(bottom = 4.dp)
-            )
             OutlinedTextField(
                 value = productName,
                 onValueChange = { productName = it.replaceFirstChar { char -> char.uppercaseChar() } },
+                label = { Text("Product Name", color = Color.Black) },
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFFF0EAD6),
@@ -111,8 +101,8 @@ fun AddProducts(navController: NavHostController, productRepository: ProductRepo
                     focusedBorderColor = Color.Black,
                     unfocusedBorderColor = Color.Black,
                     cursorColor = Color.Black,
-                    focusedTextColor = Color(0xFFE97451),
-                    unfocusedTextColor = Color(0xFFE97451)
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
                 ),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
@@ -150,16 +140,10 @@ fun AddProducts(navController: NavHostController, productRepository: ProductRepo
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(
-                text = "Product Price",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                modifier = Modifier.padding(bottom = 4.dp)
-            )
             OutlinedTextField(
                 value = productPrice,
-                onValueChange = { productPrice = it },
+                onValueChange = { productPrice = it.replaceFirstChar { char -> char.uppercaseChar() } },
+                label = { Text("Product Price", color = Color.Black) },
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFFF0EAD6),
@@ -167,8 +151,8 @@ fun AddProducts(navController: NavHostController, productRepository: ProductRepo
                     focusedBorderColor = Color.Black,
                     unfocusedBorderColor = Color.Black,
                     cursorColor = Color.Black,
-                    focusedTextColor = Color(0xFFE97451),
-                    unfocusedTextColor = Color(0xFFE97451)
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
                 ),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
@@ -178,16 +162,10 @@ fun AddProducts(navController: NavHostController, productRepository: ProductRepo
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Text(
-                text = "Product Quantity",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                modifier = Modifier.padding(bottom = 4.dp)
-            )
             OutlinedTextField(
                 value = productQuantity,
-                onValueChange = { productQuantity = it },
+                onValueChange = { productQuantity = it.replaceFirstChar { char -> char.uppercaseChar() } },
+                label = { Text("Product Quantity", color = Color.Black) },
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFFF0EAD6),
@@ -195,8 +173,8 @@ fun AddProducts(navController: NavHostController, productRepository: ProductRepo
                     focusedBorderColor = Color.Black,
                     unfocusedBorderColor = Color.Black,
                     cursorColor = Color.Black,
-                    focusedTextColor = Color(0xFFE97451),
-                    unfocusedTextColor = Color(0xFFE97451)
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
                 ),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
